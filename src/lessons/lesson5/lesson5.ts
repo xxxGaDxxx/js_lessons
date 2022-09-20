@@ -55,99 +55,99 @@ console.log(greeting.bind(someObj)())
 // rest current count - устанавливает значение счетчика равным 0
 // все методы должны ссылаться на сам объект
 
-// type CounterType = {
-//     value: number
-//     getCurrentCount: () => void
-//     increment: () => void
-//     decrement: () => void
-//     setCurrentCount: (num: number) => void
-//     rest: () => void
-// }
-
-// let counter: CounterType = {
-//     value: 0,
-//
-//     getCurrentCount() {
-//         console.log(this.value)
-//         return this.value
-//
-//     },
-//     increment() {
-//         console.log('i', this.value )
-//         return this.value =this.value+ 1
-//     },
-//     decrement() {
-//
-//         console.log('d', this.value )
-//         return this.value  = this.value- 1
-//     },
-//     setCurrentCount(num: number) {
-//         console.log('s', this.value )
-//         return this.value = num
-//     },
-//     rest() {
-//         console.log(this.value = 0)
-//         return this.value = 0
-//     },
-// }
-
-// counter.getCurrentCount()
-// counter.setCurrentCount(5)
-//
-// counter.increment()
-// counter.increment()
-// counter.increment()
-// counter.increment()
-//
-// counter.rest()
-
-
-// Task 03
-// переделайте код из Task 02, что бы сработал следующий код:
-// counter.setCurrentCount(10).increment().increment().increment().decrement().getCurrentCount() // 12
-
 type CounterType = {
     value: number
-    getCurrentCount: () => CounterType
-    increment: () => CounterType
-    decrement: () => CounterType
-    setCurrentCount: (num: number) => CounterType
-    rest: () => CounterType
+    getCurrentCount: () => number
+    increment: () => void
+    decrement: () => void
+    setCurrentCount: (num: number) => void
+    rest: () => void
 }
-
 
 let counter: CounterType = {
     value: 0,
 
     getCurrentCount() {
         console.log(this.value)
-        return counter
+        return this.value
 
     },
     increment() {
-        console.log('i', this.value)
-        this.value = this.value + 1
-        return counter
+        console.log('i', this.value )
+         this.value =this.value+ 1
     },
     decrement() {
 
-        console.log('d', this.value)
-        this.value = this.value - 1
-        return counter
+        console.log('d', this.value )
+         this.value  = this.value- 1
     },
     setCurrentCount(num: number) {
-        console.log('s', this.value)
-        this.value = num
-        return counter
+        console.log('s', this.value )
+         this.value = num
     },
     rest() {
         console.log(this.value = 0)
-        this.value = 0
-        return counter
+         this.value = 0
     },
 }
 
-counter.setCurrentCount(10).increment().increment().increment().decrement().getCurrentCount()
+counter.getCurrentCount()
+counter.setCurrentCount(5)
+
+counter.increment()
+counter.increment()
+counter.increment()
+counter.increment()
+
+counter.rest()
+
+
+// Task 03
+// переделайте код из Task 02, что бы сработал следующий код:
+// counter.setCurrentCount(10).increment().increment().increment().decrement().getCurrentCount() // 12
+
+// type CounterType = {
+//     value: number
+//     getCurrentCount: () => CounterType
+//     increment: () => CounterType
+//     decrement: () => CounterType
+//     setCurrentCount: (num: number) => CounterType
+//     rest: () => CounterType
+// }
+//
+//
+// let counter: CounterType = {
+//     value: 0,
+//
+//     getCurrentCount() {
+//         console.log(this.value)
+//         return counter
+//
+//     },
+//     increment() {
+//         console.log('i', this.value)
+//         this.value = this.value + 1
+//         return counter
+//     },
+//     decrement() {
+//
+//         console.log('d', this.value)
+//         this.value = this.value - 1
+//         return counter
+//     },
+//     setCurrentCount(num: number) {
+//         console.log('s', this.value)
+//         this.value = num
+//         return counter
+//     },
+//     rest() {
+//         console.log(this.value = 0)
+//         this.value = 0
+//         return counter
+//     },
+// }
+//
+// counter.setCurrentCount(10).increment().increment().increment().decrement().getCurrentCount()
 
 // Task 04
 // Написать функцию конструктор myFirstConstructorFunc которая принимает 2 параметра name и age и возвращает объект
@@ -160,7 +160,7 @@ type MyFirstConstructorFuncType = {
     greeting: () => void
 }
 
-function myFirstConstructorFunc(this: MyFirstConstructorFuncType, name: string, age: number) {
+function MyFirstConstructorFunc(this: MyFirstConstructorFuncType, name: string, age: number) {
 
     this.name = name
     this.age = age
@@ -170,7 +170,7 @@ function myFirstConstructorFunc(this: MyFirstConstructorFuncType, name: string, 
 }
 
 //@ts-ignore
-let a = new myFirstConstructorFunc('www', 45)
+let a = new MyFirstConstructorFunc('www', 45)
 console.log(a)
 
 // Task 05 есть 2 объекта One и Two. С помощью bind и метода sayHello заставьте поздороваться объект One
@@ -208,7 +208,9 @@ let helperObj: HelperObjType = {
     setAge(num: number) {
         this.age = num
     },
-    greeting: Two.sayHello,
+    greeting (){
+        Two.sayHello.call(this)
+    },
 }
 
 helperObj.setAge(5)

@@ -1,4 +1,6 @@
+import './js_6'
 console.log('Lesson 6');
+
 
 // Class
 // https://learn.javascript.ru/classes
@@ -6,6 +8,17 @@ console.log('Lesson 6');
 // https://www.typescriptlang.org/docs/handbook/classes.html
 // https://www.youtube.com/watch?v=BASquaxab_w
 // https://www.youtube.com/watch?v=uLY9GXGMXaA
+
+// class Test {
+//
+
+// }
+// console.dir(Test)
+// console.log(new Test())
+
+
+
+
 
 // Task 01
 // Создайте структуру с именем student, содержащую поля: имя и фамилия, номер группы, успеваемость (массив из пяти элементов).
