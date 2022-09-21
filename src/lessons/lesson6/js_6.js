@@ -1,3 +1,4 @@
+
 class Student {
 
     constructor(name, lastName, group, performance) {
@@ -20,8 +21,6 @@ let m = new Student('denis', 'lh', 58, [5, 4, 1, 3, 4])
 let o = new Student('qwe', 'lg', 59, [2, 3, 5, 4, 1])
 
 
-
-2
 // сортировка по среднему балу
 let men = [a, b, c, d, e, f, k, l, m, o]
 console.log(men)
@@ -115,45 +114,53 @@ class Buyer {
         this.address = address
         this.bankAccount = bankAccount
     }
-    get info() {
-        return `name: ${this.name}, lastName: ${this.lastName}, address: ${this.address}, bankAccount: ${this.bankAccount}`
-    }
-    get infoName() {
-        return `name: ${this.name}`
-    }
-    get infoLastName() {
-        return `lastName: ${this.lastName}`
-    }
-    get infoAddress() {
-        return `address: ${this.address}`
-    }
-    get infoBankAccount() {
-        return `bankAccount: ${this.bankAccount}`
+
+    info() {
+        return console.log(`name: ${this.name}, lastName: ${this.lastName}, address: ${this.address}, bankAccount: ${this.bankAccount}`)
     }
 
-    set nameNew(value) {
+    infoName() {
+        return console.log(`name: ${this.name}`)
+    }
+
+    infoLastName() {
+        return console.log(`lastName: ${this.lastName}`)
+    }
+
+    infoAddress() {
+        return console.log(`address: ${this.address}`)
+    }
+
+    infoBankAccount() {
+        return console.log(`bankAccount: ${this.bankAccount}`)
+    }
+
+    nameNew(value) {
         this.name = value
     }
-    set lastNameNew(value) {
+
+    lastNameNew(value) {
         this.lastName = value
     }
-    set addressNew(value) {
+
+    addressNew(value) {
         this.address = value
     }
-    set bankAccountNew(value) {
+
+    bankAccountNew(value) {
         this.bankAccount = value
     }
 }
 
 let wladd = new Buyer('wlad', 'lo', 'Grodno', '123456798')
-console.log(wladd.info)
-console.log(wladd.infoName)
-console.log(wladd.infoLastName)
-console.log(wladd.infoAddress)
-console.log(wladd.infoBankAccount)
-wladd.nameNew='Wlad'
-wladd.lastName='Loban'
-console.log(wladd.info)
+wladd.info()
+wladd.infoName()
+wladd.infoLastName()
+wladd.infoAddress()
+wladd.infoBankAccount()
+wladd.nameNew = 'Wlad'
+wladd.lastNameNew = 'Loban'
+wladd.info()
 
 let margoo = new Buyer('margo', 'lob', 'Grodno', '456123789')
 let pacha = new Buyer('pacha', 'pa', 'Minsk', '987654321')
@@ -187,18 +194,38 @@ class Car {
         this.power = power
     }
 
-    get post() {
+    post() {
         return `make: ${this.make}, number of cylinders: ${this.cylinders}, power: ${this.power}.`
     }
 }
 
-class Truck{
-    constructor(loadCapacity) {
-        this.loadCapacity=loadCapacity
+class Truck extends Car {
+    constructor(loadCapacity, make, cylinders, power) {
+        super(make, cylinders, power)
+        this.loadCapacity = loadCapacity
+    }
+
+
+    truckInfo() {
+        return console.log(`make: ${this.make}, number of cylinders: ${this.cylinders}, power: ${this.power}, loadCapacity: ${this.loadCapacity}.`)
+    }
+
+    changeMark(value) {
+        this.make = value
+    }
+
+    capacity(value) {
+        this.loadCapacity = value
     }
 
 }
 
+let asdfasd = new Truck(4000, 'kamaz', 'v8', '500')
+asdfasd.capacity = 666666
+asdfasd.make = 'VOLVO'
+asdfasd.truckInfo()
+
+console.log(asdfasd)
 
 
 
