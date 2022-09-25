@@ -4,72 +4,136 @@
 // Task 2
 // Реализуйте необходимый код, что бы выражение (2).plus(3).minus(1) сработало и вернуло 4
 
+Number.prototype.plus = function (x) {
+    console.log(this)
+    return this + x
+}
+Number.prototype.minus = function (x) {
+    console.log(this)
+    return this - x
+}
+
+// console.log((2).plus(3).minus(1))
 // Task 3
 // Реализуйте функцию, которая принимает следующие аргументы (строки) '*', '1', 'b', '1c', и возвращает строку '1*b*1c'
+function str(...arg) {
+    let a = [...arg]
+    return `${arg[0]}${arg[1]}${arg[0]}${arg[2]}${arg[0]}${arg[arg.length - 1]}`
+}
 
+// console.log(str('*', '1', 'b', '1c'))
 // Task 4
 // Напишите функцию которая найдет сумму всех вершин в структуре данны типа tree
 // Рекурсивно
 // В цикле
 
 const tree = {
-	valueNode: 3,
-	next: [{
-		valueNode: 1,
-		next: null
-	},
-		{
-			valueNode: 3,
-			next: null
-		},
-		{
-			valueNode: 2,
-			next: null
-		},
-		{
-			valueNode: 2,
-			next: [
-				{
-					valueNode: 1,
-					next: null
-				},
-				{
-					valueNode: 5,
-					next: null
-				}
-			]
-		}]
+    valueNode: 3,
+    next: [{
+        valueNode: 1,
+        next: null
+    },
+        {
+            valueNode: 3,
+            next: null
+        },
+        {
+            valueNode: 2,
+            next: null
+        },
+        {
+            valueNode: 2,
+            next: [
+                {
+                    valueNode: 1,
+                    next: null
+                },
+                {
+                    valueNode: 5,
+                    next: null
+                }
+            ]
+        }]
 };
+
+let sum = 0
+
+function treeF(obj) {
+    if (obj.next === null) {
+        return sum += obj.valueNode
+    } else {
+        sum += obj.valueNode
+        for (let i = 0; i < obj.next.length; i++) {
+            treeF(obj.next[i])
+        }
+        return sum
+    }
+}
+
+// console.log(treeF(tree))
 
 // Task 5
 // исправить код, что бы работал правильно
 
-for (var i = 0; i < 10; i++) {
-	setTimeout(function () {
-		console.log(i);
-	}, 100);
-}
+// for (let i = 0; i < 10; i++) {
+//     setTimeout(function () {
+//         console.log(i);
+//     }, 100);
+// }
 
 // Task 6
 // Реализуйте функцию Foo, что бы все корректно работало
 
 function Book(name, author) {
-	this.name = name;
-	this.author = author;
-	return this;
+    this.name = name;
+    this.author = author;
+    return this;
 }
 
-// function Foo(Book, 'Учебник javascript', 'Петр Сергеев')
-//
-// var book = Foo(Book, 'js', 'petr');
-// console.log(book.name);
+function Foo(Book, bok, auth) {
+    return Book.call(null, bok, auth)
+}
+
+var book = Foo(Book, 'js', 'petr');
+console.log(book.name);
+console.log(book.author);
 
 // Task 7
 // Реализовать функцию f: f(2, 3) -> 5, при вызове f(2)(3), тоже вернет 5
 
+function fff(a, b) {
+    // console.log(b)
+    if (b !== undefined) {
+        // console.log(1)
+        return a + b
+    } else {
+        // console.log(2)
+        return function (b) {
+            return a + b
+        }
+    }
+}
+
+// console.log(fff(2, 3))
+// console.log(fff(2,)(3))
+
 // Task 8
 // Реализовать функцию f: f(1)(2)(3)() -> 6, f(0)(3)(1)(5)() -> 8
 
+// function f2(a){
+//    return function (...arg){
+//        let b =[...arg]
+//        console.log(b)
+//        let c = a
+//        for (let i = 0; i < b.length; i++) {
+//            c +=arg[i]
+//        }
+//        return c
+//    }
+// }
+//
+// console.log(f2(1)(2)(3))
+// console.log(f2(0)(3)(1)(5)())
 // Task 9
 // Реализовать функции seven, plus, one, five, minus, two так, что бы следующие вызовы работали seven(plus(one())) -> 8. five(minus(two())) -> 3
 
@@ -91,23 +155,23 @@ function Book(name, author) {
 // getTreeValues(tree); // => [1, 2, 3, 4, 5, 6, 7]
 
 const tree2 = {
-	value: 1,
-	children: [
-		{
-			value: 2,
-			children: [
-				{ value: 4 },
-				{ value: 5 },
-			]
-		},
-		{
-			value: 3,
-			children: [
-				{ value: 6 },
-				{ value: 7 },
-			]
-		}
-	]
+    value: 1,
+    children: [
+        {
+            value: 2,
+            children: [
+                {value: 4},
+                {value: 5},
+            ]
+        },
+        {
+            value: 3,
+            children: [
+                {value: 6},
+                {value: 7},
+            ]
+        }
+    ]
 };
 
 // Task 15
@@ -148,14 +212,14 @@ const tree2 = {
 // Task 21
 // Что выведет консоль?
 
-Promise
-	.resolve()
-	.then(() => console.log(1))
-	.then(() => console.log(2))
-	.then(() => console.log(3));
-
-Promise
-	.resolve()
-	.then(() => console.log(4))
-	.then(() => console.log(5))
-	.then(() => console.log(6));
+// Promise
+// 	.resolve()
+// 	.then(() => console.log(1))
+// 	.then(() => console.log(2))
+// 	.then(() => console.log(3));
+//
+// Promise
+// 	.resolve()
+// 	.then(() => console.log(4))
+// 	.then(() => console.log(5))
+// 	.then(() => console.log(6));
